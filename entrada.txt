@@ -1,0 +1,29 @@
+var num1
+var num2
+var num3
+
+num1 = 20
+num2 = 40
+num3 = 8
+
+	IF(num1 > num2){
+		IF (num1 > num3){
+			PRINT(num1)
+		}ELSE{
+			PRINT(num3)
+		}
+	}
+	ELSE{
+		IF(num2 > num3){
+			PRINT(num2)
+		}ELSE{
+			PRINT(num3)
+		}
+	}
+		WHILE(num3 < num2){
+			num3 = num3 + 2
+			PRINT(num3)
+		}
+		
+FIM
+
