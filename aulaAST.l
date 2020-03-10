@@ -1,33 +1,66 @@
 %{
 #include <string.h>
+// {DECL} {return DECL;}
+// DECL "var"
+// STRING \'{STG}\'
+// {PRINTS} {return PRINTS;}
 %}
 
 NUM [0-9]+\.?[0-9]*
-VARS[a-z]+[0-9]*
-FIM "FIM"
-IF "IF"
-ELSE "ELSE"
-WHILE "WHILE"
-PRINT "PRINT"
-DECL "var"	
+VARS [a-z]+[0-9]*
+STG [a-zA-Z0-9]+
+STRING \"([^\\\"]|\\.)*\"
+INIT "Init"
+FIM "End"
+IF "if"
+ELSE "else"
+WHILE "loop"
+PRINT "pr"
+PRINTS "prs"
+ENTRA "ent"
+ENTRAS "ents"
+DECLI "int"
+DECLF "fot"
+DECLS "stg"
+SQRT "sqrt:"
 
 %%
+{INIT} {return INIT;}
 {FIM} {return FIM;}
 {IF} {return IF;}
 {ELSE} {return ELSE;}
 {WHILE} {return WHILE;}
 {PRINT} {return PRINT;}
-{DECL} {return DECL;}
-
-{VARS} {
-	strcpy(yylval.str,yytext);
-	return VARS;
-	}
+{ENTRA} {return ENTRA;}
+{ENTRAS} {return ENTRAS;}
 
 {NUM} {
 	yylval.flo = atof(yytext);
 	return NUM;
 	}
+
+{STRING} {
+	strcpy(yylval.str,yytext);
+	return STRING;
+}
+
+{DECLI} {
+	return DECLI;
+}
+{DECLF} {
+	return DECLF;
+}
+{DECLS} {
+	return DECLS;
+}
+{VARS} {
+	strcpy(yylval.str,yytext);
+	return VARS;
+	}
+
+{SQRT} {
+	return SQRT;
+}
 
 [-+()=/*^{};] {return *yytext;
 			}

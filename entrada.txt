@@ -1,29 +1,41 @@
-var num1
-var num2
-var num3
+Init
 
-num1 = 20
-num2 = 40
-num3 = 8
+int u
+int i
+i = 4
+u = 2
 
-	IF(num1 > num2){
-		IF (num1 > num3){
-			PRINT(num1)
-		}ELSE{
-			PRINT(num3)
-		}
-	}
-	ELSE{
-		IF(num2 > num3){
-			PRINT(num2)
-		}ELSE{
-			PRINT(num3)
-		}
-	}
-		WHILE(num3 < num2){
-			num3 = num3 + 2
-			PRINT(num3)
-		}
-		
-FIM
+if(i < u){ 
+    ent(u)
+    pr("Oi")
+}
+
+
+
+int a
+int b
+int c
+fot result
+pr(" ")
+
+pr("Teorema de Pitágoras")
+pr("a²=c²+b²")
+pr("Sendo:")
+pr("a:hipotenusa")
+pr("c e b:catetos")
+pr(" ")
+
+pr("Digite um valor inteiro para c")
+ent(c)
+pr("Agora digite um valor inteito para b")
+ent(b)
+pr(" ")
+a = (c^2) + (b^2)
+result = sqrt:a
+
+pr("O resultado é:")
+pr(result)
+
+
+End
 
