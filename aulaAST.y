@@ -280,6 +280,17 @@ Ast * newasgn(char s[50], Ast *v) { /*Função para um nó de atribuição*/
 }
 
 
+Ast * emptyAst(int nodetype){ /*Função para criar um nó*/
+
+	Ast *a = (Ast*) malloc(sizeof(Ast));
+	if(!a) {
+		printf("out of space");
+		exit(0);
+	}
+	a->nodetype = nodetype;
+	return a;
+}
+
 Ast * newValorVal(char s[50]) { /*Função que recupera o nome/referência de uma variável, neste caso o número*/
 	
 	Varval *a = (Varval*) malloc(sizeof(Varval));
@@ -389,12 +400,10 @@ double eval(Ast *a) { /*Função que executa operações a partir de um nó*/
 			break;
 		
 		case 'I':						/*CASO IF*/
-			;
-			oi = eval(((Flow *)a)->cond);
-			printf("%f",oi);
 			if (eval(((Flow *)a)->cond) != 0) {	/*executa a condição / teste*/
-				if (((Flow *)a)->tl)		/*Se existir árvore*/
+				if (((Flow *)a)->tl){		/*Se existir árvore*/
 					v = eval(((Flow *)a)->tl); /*Verdade*/
+				}
 				else
 					v = 0.0;
 			} else {

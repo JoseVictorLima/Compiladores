@@ -1,0 +1,63 @@
+Formato padrão do código: 
+    Init
+    “operações”
+    End
+Números Aceitos: Números Positivos, Negativos e de Ponto Flutuante.
+    ex:    1
+        ou
+        -1
+        ou
+        1.00
+        ou
+        -1.00
+Strings Aceitas: Caracteres Alfanuméricos (Obs: Não aceita espaço, ç , acentos,  caracteres especiais)
+    ex:    Oi
+        ou
+        Oi123
+        ou
+        123
+        ou
+        123Oi
+Declaração de Variável Numérica: var
+    ex:     var v1
+        ou
+        var v1 = 2
+Declaração de Variável String: stg
+    ex:    stg a1
+        ou
+        stg a1 = ‘String’
+Atribuição: =
+ex:     v1 = 2
+Escrita: pr(“Variável ou String ou Operação”)
+    ex:    pr(v1)
+        ou
+        pr(“String”)
+Leitura: ent(“Variável”)
+    ex:    ent(v1)
+
+Obs: As operações matemáticas devem ser usadas em uma atribuição ou dentro da função de escrita
+Soma: +
+    ex:    v1 + v2
+        ou
+        v1 = v2 + v3
+Subtração: -
+    ex:    v1 - v2
+        ou
+        v1 = v2 - v3
+Multiplicação: *
+    ex:    v1 * v2
+        ou
+        v1 = v2 * v3
+Divisão: /
+    ex:     v1 / v2
+        ou
+        v1 = v1 / v2
+Exponenciação:  ^
+    ex:    v1^2
+        ou
+        v1^v2
+        ou
+        v1 = v1^2
+        ou
+        v1 = v1^v2
+

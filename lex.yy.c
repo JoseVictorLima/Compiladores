@@ -717,7 +717,7 @@ YY_DECL
 		}
 
 	{
-#line 27 "aulaAST.l"
+#line 26 "aulaAST.l"
 
 #line 723 "lex.yy.c"
 
@@ -778,47 +778,47 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 28 "aulaAST.l"
+#line 27 "aulaAST.l"
 {return INIT;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 29 "aulaAST.l"
+#line 28 "aulaAST.l"
 {return FIM;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 30 "aulaAST.l"
+#line 29 "aulaAST.l"
 {return IF;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 31 "aulaAST.l"
+#line 30 "aulaAST.l"
 {return ELSE;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 32 "aulaAST.l"
+#line 31 "aulaAST.l"
 {return WHILE;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 33 "aulaAST.l"
+#line 32 "aulaAST.l"
 {return PRINT;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 34 "aulaAST.l"
+#line 33 "aulaAST.l"
 {return ENTRA;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 35 "aulaAST.l"
+#line 34 "aulaAST.l"
 {return ENTRAS;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 37 "aulaAST.l"
+#line 36 "aulaAST.l"
 {
 	yylval.flo = atof(yytext);
 	return NUM;
@@ -827,7 +827,7 @@ YY_RULE_SETUP
 case 10:
 /* rule 10 can match eol */
 YY_RULE_SETUP
-#line 42 "aulaAST.l"
+#line 41 "aulaAST.l"
 {
 	strcpy(yylval.str,yytext);
 	return STRING;
@@ -835,28 +835,28 @@ YY_RULE_SETUP
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 47 "aulaAST.l"
+#line 46 "aulaAST.l"
 {
 	return DECLI;
 }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 50 "aulaAST.l"
+#line 49 "aulaAST.l"
 {
 	return DECLF;
 }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 53 "aulaAST.l"
+#line 52 "aulaAST.l"
 {
 	return DECLS;
 }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 56 "aulaAST.l"
+#line 55 "aulaAST.l"
 {
 	strcpy(yylval.str,yytext);
 	return VARS;
@@ -864,61 +864,61 @@ YY_RULE_SETUP
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 61 "aulaAST.l"
+#line 60 "aulaAST.l"
 {
 	return SQRT;
 }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 65 "aulaAST.l"
+#line 64 "aulaAST.l"
 {return *yytext;
 			}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 69 "aulaAST.l"
+#line 68 "aulaAST.l"
 {yylval.fn = 1; return CMP; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 70 "aulaAST.l"
+#line 69 "aulaAST.l"
 {yylval.fn = 2; return CMP; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 71 "aulaAST.l"
+#line 70 "aulaAST.l"
 {yylval.fn = 3; return CMP; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 72 "aulaAST.l"
+#line 71 "aulaAST.l"
 {yylval.fn = 4; return CMP; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 73 "aulaAST.l"
+#line 72 "aulaAST.l"
 {yylval.fn = 5; return CMP; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 74 "aulaAST.l"
+#line 73 "aulaAST.l"
 {yylval.fn = 6; return CMP; }
 	YY_BREAK
 case 23:
 /* rule 23 can match eol */
 YY_RULE_SETUP
-#line 76 "aulaAST.l"
+#line 75 "aulaAST.l"
 {;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 77 "aulaAST.l"
+#line 76 "aulaAST.l"
 {printf("(%s) Ingonrado\n",yytext);}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 78 "aulaAST.l"
+#line 77 "aulaAST.l"
 ECHO;
 	YY_BREAK
 #line 925 "lex.yy.c"
@@ -1926,5 +1926,5 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 78 "aulaAST.l"
+#line 77 "aulaAST.l"
 

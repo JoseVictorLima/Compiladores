@@ -349,6 +349,17 @@ Ast * newasgn(char s[50], Ast *v) { /*Função para um nó de atribuição*/
 }
 
 
+Ast * emptyAst(int nodetype){ /*Função para criar um nó*/
+
+	Ast *a = (Ast*) malloc(sizeof(Ast));
+	if(!a) {
+		printf("out of space");
+		exit(0);
+	}
+	a->nodetype = nodetype;
+	return a;
+}
+
 Ast * newValorVal(char s[50]) { /*Função que recupera o nome/referência de uma variável, neste caso o número*/
 	
 	Varval *a = (Varval*) malloc(sizeof(Varval));
@@ -458,12 +469,10 @@ double eval(Ast *a) { /*Função que executa operações a partir de um nó*/
 			break;
 		
 		case 'I':						/*CASO IF*/
-			;
-			oi = eval(((Flow *)a)->cond);
-			printf("%f",oi);
 			if (eval(((Flow *)a)->cond) != 0) {	/*executa a condição / teste*/
-				if (((Flow *)a)->tl)		/*Se existir árvore*/
+				if (((Flow *)a)->tl){		/*Se existir árvore*/
 					v = eval(((Flow *)a)->tl); /*Verdade*/
+				}
 				else
 					v = 0.0;
 			} else {
@@ -532,7 +541,7 @@ void yyerror (char *s){
 }
 
 
-#line 536 "aulaAST.tab.c" /* yacc.c:337  */
+#line 545 "aulaAST.tab.c" /* yacc.c:337  */
 # ifndef YY_NULLPTR
 #  if defined __cplusplus
 #   if 201103L <= __cplusplus
@@ -594,7 +603,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 467 "aulaAST.y" /* yacc.c:352  */
+#line 476 "aulaAST.y" /* yacc.c:352  */
 
 	float flo;
 	int fn;
@@ -604,7 +613,7 @@ union YYSTYPE
 	Ast *a;
 	
 
-#line 608 "aulaAST.tab.c" /* yacc.c:352  */
+#line 617 "aulaAST.tab.c" /* yacc.c:352  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -909,9 +918,9 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,   496,   496,   499,   500,   506,   507,   508,   509,   510,
-     532,   545,   546,   560,   584,   585,   586,   589,   590,   594,
-     595,   596,   597,   598,   599,   600,   601,   602,   603,   604
+       0,   505,   505,   508,   509,   515,   516,   517,   518,   519,
+     541,   554,   555,   569,   593,   594,   595,   598,   599,   603,
+     604,   605,   606,   607,   608,   609,   610,   611,   612,   613
 };
 #endif
 
@@ -1757,43 +1766,43 @@ yyreduce:
   switch (yyn)
     {
         case 3:
-#line 499 "aulaAST.y" /* yacc.c:1652  */
+#line 508 "aulaAST.y" /* yacc.c:1652  */
     {eval((yyvsp[0].a));}
-#line 1763 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 1772 "aulaAST.tab.c" /* yacc.c:1652  */
     break;
 
   case 4:
-#line 500 "aulaAST.y" /* yacc.c:1652  */
+#line 509 "aulaAST.y" /* yacc.c:1652  */
     {eval((yyvsp[0].a));}
-#line 1769 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 1778 "aulaAST.tab.c" /* yacc.c:1652  */
     break;
 
   case 5:
-#line 506 "aulaAST.y" /* yacc.c:1652  */
-    { (yyval.a) = newflow('I', (yyvsp[-1].a), (yyvsp[-4].a), NULL);}
-#line 1775 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 515 "aulaAST.y" /* yacc.c:1652  */
+    { (yyval.a) = newflow('I', (yyvsp[-4].a), (yyvsp[-1].a), NULL);}
+#line 1784 "aulaAST.tab.c" /* yacc.c:1652  */
     break;
 
   case 6:
-#line 507 "aulaAST.y" /* yacc.c:1652  */
+#line 516 "aulaAST.y" /* yacc.c:1652  */
     {(yyval.a) = newflow('I', (yyvsp[-8].a), (yyvsp[-5].a), (yyvsp[-1].a));}
-#line 1781 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 1790 "aulaAST.tab.c" /* yacc.c:1652  */
     break;
 
   case 7:
-#line 508 "aulaAST.y" /* yacc.c:1652  */
+#line 517 "aulaAST.y" /* yacc.c:1652  */
     {(yyval.a) = newflow('W', (yyvsp[-4].a), (yyvsp[-1].a), NULL);}
-#line 1787 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 1796 "aulaAST.tab.c" /* yacc.c:1652  */
     break;
 
   case 8:
-#line 509 "aulaAST.y" /* yacc.c:1652  */
+#line 518 "aulaAST.y" /* yacc.c:1652  */
     {(yyval.a) = newasgn((yyvsp[-2].str),(yyvsp[0].a));}
-#line 1793 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 1802 "aulaAST.tab.c" /* yacc.c:1652  */
     break;
 
   case 9:
-#line 510 "aulaAST.y" /* yacc.c:1652  */
+#line 519 "aulaAST.y" /* yacc.c:1652  */
     {
 		char new[255];
 		int last = sizeof((yyvsp[0].stg))/sizeof(char);
@@ -1815,11 +1824,11 @@ yyreduce:
 		}
 		(yyval.a) = newasgn((yyvsp[0].stg),newnum(1));
 	}
-#line 1819 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 1828 "aulaAST.tab.c" /* yacc.c:1652  */
     break;
 
   case 10:
-#line 532 "aulaAST.y" /* yacc.c:1652  */
+#line 541 "aulaAST.y" /* yacc.c:1652  */
     {
 		char new[255];
 		int last = sizeof((yyvsp[-1].stg))/sizeof(char);
@@ -1833,17 +1842,17 @@ yyreduce:
 		printf ("%s \n",new);
 		(yyval.a) = newasgn((yyvsp[-1].stg),newnum(1));
 	}
-#line 1837 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 1846 "aulaAST.tab.c" /* yacc.c:1652  */
     break;
 
   case 11:
-#line 545 "aulaAST.y" /* yacc.c:1652  */
+#line 554 "aulaAST.y" /* yacc.c:1652  */
     { (yyval.a) = newast('P',(yyvsp[-1].a),NULL);}
-#line 1843 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 1852 "aulaAST.tab.c" /* yacc.c:1652  */
     break;
 
   case 12:
-#line 546 "aulaAST.y" /* yacc.c:1652  */
+#line 555 "aulaAST.y" /* yacc.c:1652  */
     {
 		char s[255];
 		STRS * stingCheck = buscaS(k1,(yyvsp[-1].str));
@@ -1858,11 +1867,11 @@ yyreduce:
 			}
 		}
 	}
-#line 1862 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 1871 "aulaAST.tab.c" /* yacc.c:1652  */
     break;
 
   case 13:
-#line 560 "aulaAST.y" /* yacc.c:1652  */
+#line 569 "aulaAST.y" /* yacc.c:1652  */
     { 
 		float v;
 		INTERS * intCheck = buscaI(i1,(yyvsp[-1].str));
@@ -1886,107 +1895,107 @@ yyreduce:
 		
 		
 	}
-#line 1890 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 1899 "aulaAST.tab.c" /* yacc.c:1652  */
     break;
 
   case 14:
-#line 584 "aulaAST.y" /* yacc.c:1652  */
+#line 593 "aulaAST.y" /* yacc.c:1652  */
     { (yyval.a) = newvari((yyvsp[0].str),1);}
-#line 1896 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 1905 "aulaAST.tab.c" /* yacc.c:1652  */
     break;
 
   case 15:
-#line 585 "aulaAST.y" /* yacc.c:1652  */
+#line 594 "aulaAST.y" /* yacc.c:1652  */
     { (yyval.a) = newvari((yyvsp[0].str),2);}
-#line 1902 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 1911 "aulaAST.tab.c" /* yacc.c:1652  */
     break;
 
   case 16:
-#line 586 "aulaAST.y" /* yacc.c:1652  */
+#line 595 "aulaAST.y" /* yacc.c:1652  */
     { (yyval.a) = newvari((yyvsp[0].str),3);}
-#line 1908 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 1917 "aulaAST.tab.c" /* yacc.c:1652  */
     break;
 
   case 17:
-#line 589 "aulaAST.y" /* yacc.c:1652  */
+#line 598 "aulaAST.y" /* yacc.c:1652  */
     {(yyval.a) = (yyvsp[0].a);}
-#line 1914 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 1923 "aulaAST.tab.c" /* yacc.c:1652  */
     break;
 
   case 18:
-#line 590 "aulaAST.y" /* yacc.c:1652  */
+#line 599 "aulaAST.y" /* yacc.c:1652  */
     { (yyval.a) = newast('L', (yyvsp[-1].a), (yyvsp[0].a));	}
-#line 1920 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 1929 "aulaAST.tab.c" /* yacc.c:1652  */
     break;
 
   case 19:
-#line 594 "aulaAST.y" /* yacc.c:1652  */
+#line 603 "aulaAST.y" /* yacc.c:1652  */
     {(yyval.a) = newast('+',(yyvsp[-2].a),(yyvsp[0].a));}
-#line 1926 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 1935 "aulaAST.tab.c" /* yacc.c:1652  */
     break;
 
   case 20:
-#line 595 "aulaAST.y" /* yacc.c:1652  */
+#line 604 "aulaAST.y" /* yacc.c:1652  */
     {(yyval.a) = newast('-',(yyvsp[-2].a),(yyvsp[0].a));}
-#line 1932 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 1941 "aulaAST.tab.c" /* yacc.c:1652  */
     break;
 
   case 21:
-#line 596 "aulaAST.y" /* yacc.c:1652  */
+#line 605 "aulaAST.y" /* yacc.c:1652  */
     {(yyval.a) = newast('*',(yyvsp[-2].a),(yyvsp[0].a));}
-#line 1938 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 1947 "aulaAST.tab.c" /* yacc.c:1652  */
     break;
 
   case 22:
-#line 597 "aulaAST.y" /* yacc.c:1652  */
+#line 606 "aulaAST.y" /* yacc.c:1652  */
     {(yyval.a) = newast('/',(yyvsp[-2].a),(yyvsp[0].a));}
-#line 1944 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 1953 "aulaAST.tab.c" /* yacc.c:1652  */
     break;
 
   case 23:
-#line 598 "aulaAST.y" /* yacc.c:1652  */
+#line 607 "aulaAST.y" /* yacc.c:1652  */
     {(yyval.a) = newast('^',(yyvsp[-2].a),(yyvsp[0].a));}
-#line 1950 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 1959 "aulaAST.tab.c" /* yacc.c:1652  */
     break;
 
   case 24:
-#line 599 "aulaAST.y" /* yacc.c:1652  */
+#line 608 "aulaAST.y" /* yacc.c:1652  */
     {(yyval.a) = newast('R',newnum(1),(yyvsp[0].a));}
-#line 1956 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 1965 "aulaAST.tab.c" /* yacc.c:1652  */
     break;
 
   case 25:
-#line 600 "aulaAST.y" /* yacc.c:1652  */
+#line 609 "aulaAST.y" /* yacc.c:1652  */
     {(yyval.a) = newcmp((yyvsp[-1].fn),(yyvsp[-2].a),(yyvsp[0].a));}
-#line 1962 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 1971 "aulaAST.tab.c" /* yacc.c:1652  */
     break;
 
   case 26:
-#line 601 "aulaAST.y" /* yacc.c:1652  */
+#line 610 "aulaAST.y" /* yacc.c:1652  */
     {(yyval.a) = (yyvsp[-1].a);}
-#line 1968 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 1977 "aulaAST.tab.c" /* yacc.c:1652  */
     break;
 
   case 27:
-#line 602 "aulaAST.y" /* yacc.c:1652  */
+#line 611 "aulaAST.y" /* yacc.c:1652  */
     {(yyval.a) = newast('M',(yyvsp[0].a),NULL);}
-#line 1974 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 1983 "aulaAST.tab.c" /* yacc.c:1652  */
     break;
 
   case 28:
-#line 603 "aulaAST.y" /* yacc.c:1652  */
+#line 612 "aulaAST.y" /* yacc.c:1652  */
     {(yyval.a) = newnum((yyvsp[0].flo));}
-#line 1980 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 1989 "aulaAST.tab.c" /* yacc.c:1652  */
     break;
 
   case 29:
-#line 604 "aulaAST.y" /* yacc.c:1652  */
+#line 613 "aulaAST.y" /* yacc.c:1652  */
     {(yyval.a) = newValorVal((yyvsp[0].str));}
-#line 1986 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 1995 "aulaAST.tab.c" /* yacc.c:1652  */
     break;
 
 
-#line 1990 "aulaAST.tab.c" /* yacc.c:1652  */
+#line 1999 "aulaAST.tab.c" /* yacc.c:1652  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2217,7 +2226,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 610 "aulaAST.y" /* yacc.c:1918  */
+#line 619 "aulaAST.y" /* yacc.c:1918  */
 
 
 #include "lex.yy.c"

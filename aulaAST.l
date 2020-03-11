@@ -8,7 +8,6 @@
 
 NUM [0-9]+\.?[0-9]*
 VARS [a-z]+[0-9]*
-STG [a-zA-Z0-9]+
 STRING \"([^\\\"]|\\.)*\"
 INIT "Init"
 FIM "End"

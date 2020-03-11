@@ -1,17 +1,5 @@
 Init
 
-int u
-int i
-i = 4
-u = 2
-
-if(i < u){ 
-    ent(u)
-    pr("Oi")
-}
-
-
-
 int a
 int b
 int c
