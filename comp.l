@@ -8,6 +8,7 @@
 
 NUM [0-9]+\.?[0-9]*
 VARS [a-z]+[0-9]*
+COMENT "c\/\/"
 STRING \"([^\\\"]|\\.)*\"
 INIT "Init"
 FIM "End"
@@ -32,6 +33,7 @@ SQRT "sqrt:"
 {PRINT} {return PRINT;}
 {ENTRA} {return ENTRA;}
 {ENTRAS} {return ENTRAS;}
+{COMENT} {return COMENT;}
 
 {NUM} {
 	yylval.flo = atof(yytext);

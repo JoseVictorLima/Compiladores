@@ -1,0 +1,28 @@
+Init
+
+fot a
+fot b
+fot c
+
+pr("Sua primeira nota")
+ent(a)
+c// pr("Comentario")
+pr(" ")
+
+
+pr("Sua segunda nota")
+ent(b)
+c// pr(b)
+pr(" ")
+
+c = (a + b) / 2
+pr("Sua Média:")
+pr(c)
+pr(" ")
+
+if(c>=7){
+   pr("Aprovado")
+}else{
+   pr("Reprovado")
+}
+End

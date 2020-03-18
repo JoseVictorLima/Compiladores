@@ -169,31 +169,31 @@ Ast * newast(int nodetype, Ast *l, Ast *r){ /*Função para criar um nó*/
 }
  
 
-// Ast * newValorValS(char s[255]) { /*Função que recupera o nome/referência de uma variável, neste caso o número*/
+Ast * newValorValS(char s[255], char node) { /*Função que recupera o nome/referência de uma variável, neste caso o número*/
 	
-// 	STRS *a = (STRS*) malloc(sizeof(STRS));
-// 	if(!a) {
-// 		printf("out of space");
-// 		exit(0);
-// 	}
-// 	a->nodetype = 'Q';
-// 	strcpy(a->valor,s);
-// 	return (Ast*)a;
+	STRS *a = (STRS*) malloc(sizeof(STRS));
+	if(!a) {
+		printf("out of space");
+		exit(0);
+	}
+	a->nodetype = node;
+	strcpy(a->valor,s);
+	return (Ast*)a;
 	
-// }
+}
 
 Ast * newvari(char nome[50],int tipoVar) {		/*Função de que cria uma nova variável*/
 	INTERS * intCheck = buscaI(i1,nome);
 	FLOATERS * floatCheck = buscaF(f1,nome);
-	STRS * stingCheck = buscaS(k1,nome);
-	if(intCheck!=NULL || floatCheck!=NULL || stingCheck!=NULL){
+	STRS * stringCheck = buscaS(k1,nome);
+	if(intCheck!=NULL || floatCheck!=NULL || stringCheck!=NULL){
 		printf("Variavel já declarada: %s\n",nome);
 		exit(0);
 	}
 	if(tipoVar==1){
 		FLOATERS * floatCheck = buscaF(f1,nome);
-		STRS * stingCheck = buscaS(k1,nome);
-		if(stingCheck!=NULL || floatCheck!=NULL){
+		STRS * stringCheck = buscaS(k1,nome);
+		if(stringCheck!=NULL || floatCheck!=NULL){
 			printf("Variavel já declarada: %s\n",nome);
 			exit(0);
 		}
@@ -306,23 +306,60 @@ Ast * newValorVal(char s[50]) { /*Função que recupera o nome/referência de um
 
 
 
-// char * eval2(Ast *a) { /*Função que executa operações a partir de um nó*/
-	// 	STRS *aux1;
-	// 	char *v2;
-		
-	// 		switch(a->nodetype) {
+char * eval2(Ast *a) { /*Função que executa operações a partir de um nó*/
+		STRS *aux1;
+		char *v2;
+			// printf("%s \n",((STRS *)a)->name);
+			switch(a->nodetype) {
 			
-	// 		case 'Q':
-	// 			aux1 = buscaS(k1,((STRS *)a)->valor);
-	// 			return aux1->valor;
-	// 			break;
+			case 'N':
+				aux1 = buscaS(k1,((STRS *)a)->name);
+				if(aux1!=NULL){
+					// char new[255];
+					// int last = sizeof(aux1->valor)/sizeof(char);
+					// int aux = 0;
+					// for(int i = 0;i<last;i++){
+					// 	if(aux1->valor[i]!=34){
+					// 		new[aux] = aux1->valor[i];
+					// 		aux++;
+					// 	}
+					// }
+					// printf ("%s \n",aux1->valor);
+					v2 = aux1->valor;
+				}
+				break;
 
-	// 		default: printf("internal error: bad node %c\n", a->nodetype);
-	// 				break;
-	// 	}
+			case 'Q':
+				aux1 = buscaS(k1,((STRS *)a)->valor);
+				return aux1->valor;
+				break;
+			
+			case 'S':
+				if(((STRS *)a)->valor!=NULL){
+					printf ("%s \n",((STRS *)a)->valor);
+				}
+				// aux1 = buscaS(k1,((STRS *)a)->valor);
+				// if(aux1!=NULL){
+				// 	printf("aqui");
+					// char new[255];
+					// int last = sizeof(aux1->valor)/sizeof(char);
+					// int aux = 0;
+					// for(int i = 0;i<last;i++){
+					// 	if(aux1->valor[i]!=34){
+					// 		new[aux] = aux1->valor[i];
+					// 		aux++;
+					// 	}
+					// }
+				// 	printf ("%s \n",aux1->valor);
+				// }
+				break;
+
+			default: printf("internal error: bad node %c\n", a->nodetype);
+					break;
+		}
 		
-	// return v2;
-	// }
+	return v2;
+	}
 
 double eval(Ast *a) { /*Função que executa operações a partir de um nó*/
 	double v;
@@ -338,6 +375,7 @@ double eval(Ast *a) { /*Função que executa operações a partir de um nó*/
 		return 0.0;
 	}
 	switch(a->nodetype) {
+		case '0': break;
 		case 'K': v = ((Numval *)a)->number; break; 	/*Recupera um número*/
 		// case 'A': v = ((INTERS *)a)->valor; break; 	/*Recupera um número*/
 		// case 'B': v = ((FLOATERS *)a)->valor; break; 	/*Recupera um número*/
@@ -353,11 +391,13 @@ double eval(Ast *a) { /*Função que executa operações a partir de um nó*/
 				if(aux2!=NULL){
 					v = aux2->valor;
 					tipoPrint = 2;
-				} else {
+				} 
+				else {
 					aux3 = buscaS(k1,((STRS *)a)->name);
 					if(aux3!=NULL){
+						// v = 0;
 						tipoPrint = 3;
-						strcpy(auxChar,aux3->valor);
+				// 		strcpy(auxChar,aux3->valor);
 					}
 				}
 			} 
@@ -391,6 +431,8 @@ double eval(Ast *a) { /*Função que executa operações a partir de um nó*/
 					aux3 = buscaS(k1,((Symasgn *)a)->s);
 					if(aux3!=NULL){
 						strcpy(auxChar,aux3->valor);
+					} else{
+						printf ("Variável não declarada \n");
 					}
 				}
 			} 
@@ -438,7 +480,10 @@ double eval(Ast *a) { /*Função que executa operações a partir de um nó*/
 					v = eval(a->l);		/*Recupera um valor*/
 					if(tipoPrint==1) {printf ("%.0f\n",v); }  /*Função que imprime um valor*/
 					else if(tipoPrint==2) {printf ("%.2f\n",v); }
-					else if(tipoPrint==3) { printf("%s\n",auxChar);}
+					else if(tipoPrint==3) { 
+						// printf("%s \n",((STRS *)a)->name);
+						printf("%s \n",eval2(a->l));
+						}
 					else{ 
 						printf ("Variável não declarada\n");
 					}
@@ -447,6 +492,7 @@ double eval(Ast *a) { /*Função que executa operações a partir de um nó*/
 					break;
 
 		case 'S':
+					eval2(a);
 					// aux1 = buscaI(i1,((Symasgn *)a)->s);
 					// if(aux1!=NULL){
 					// 	printf("Funcionou")
@@ -459,7 +505,7 @@ double eval(Ast *a) { /*Função que executa operações a partir de um nó*/
 					break;
 		case 'C': 	k1 = insereS(k1,((STRS*)a)->name);
 					break;
-			
+
 		default: printf("internal error: bad node %c\n", a->nodetype);
 				
 	}
@@ -485,7 +531,7 @@ void yyerror (char *s){
 %token <flo>NUM
 %token <str>VARS
 %token <stg>STRING
-%token INIT FIM IF ELSE WHILE PRINT DECL ENTRA ENTRAS SQRT
+%token INIT FIM IF ELSE WHILE PRINT DECL ENTRA ENTRAS SQRT COMENT
 %token <fn> CMP
 %token DECLI
 %token DECLF
@@ -512,7 +558,10 @@ prog: stmt 		{eval($1);}  /*Inicia e execução da árvore de derivação*/
 /*Funções para análise sintática e criação dos nós na AST*/	
 /*Verifique q nenhuma operação é realizada na ação semântica, apenas são criados nós na árvore de derivação com suas respectivas operações*/
 	
-stmt: IF '(' exp ')' '{' list '}' %prec IFX { $$ = newflow('I', $3, $6, NULL);}
+stmt: COMENT stmt {
+		$$ = emptyAst('0');
+		}
+	| IF '(' exp ')' '{' list '}' %prec IFX { $$ = newflow('I', $3, $6, NULL);}
 	| IF '(' exp ')' '{' list '}' ELSE '{' list '}' {$$ = newflow('I', $3, $6, $10);}
 	| WHILE '(' exp ')' '{' list '}' {$$ = newflow('W', $3, $6, NULL);}
 	| VARS '=' exp {$$ = newasgn($1,$3);}
@@ -520,24 +569,23 @@ stmt: IF '(' exp ')' '{' list '}' %prec IFX { $$ = newflow('I', $3, $6, NULL);}
 		char new[255];
 		int last = sizeof($3)/sizeof(char);
 		int aux = 0;
-		STRS * stingCheck = buscaS(k1,$1);
-		if(stingCheck!=NULL){
+		STRS * stringCheck = buscaS(k1,$1);
+		if(stringCheck!=NULL){
 			for(int i = 0;i<last;i++){
 				if($3[i]!=34){
 					new[aux] = $3[i];
 					aux++;
 				}
 			}
-			strcpy(stingCheck->valor,new);
-			
+			strcpy(stringCheck->valor,new);
+			// printf("aqui \n");
 		} else {
-			if(stingCheck == NULL){
+			if(stringCheck == NULL){
 				printf ("Variável não declarada : %s\n",$3);
 			}
 		}
-		$$ = newasgn($3,newnum(1));
+		$$ = emptyAst('0');
 	}
-	// | PRINTS '(' exp1 ')' {$$ = newast('Y',$3,NULL);}
 	| PRINT '(' STRING ')' {
 		char new[255];
 		int last = sizeof($3)/sizeof(char);
@@ -548,20 +596,20 @@ stmt: IF '(' exp ')' '{' list '}' %prec IFX { $$ = newflow('I', $3, $6, NULL);}
 				aux++;
 			}
 		}
-		printf ("%s \n",new);
-		$$ = newasgn($3,newnum(1));
+		
+		$$ = newValorValS(new,'S');
 	}	
 	| PRINT '(' exp ')' { $$ = newast('P',$3,NULL);}
 	| ENTRAS '('VARS')'	{
 		char s[255];
-		STRS * stingCheck = buscaS(k1,$3);
-		if(stingCheck!=NULL){
+		STRS * stringCheck = buscaS(k1,$3);
+		if(stringCheck!=NULL){
 			printf ("Entrada : ");
 			scanf ("%s",s);
-			strcpy(stingCheck->valor,s);
+			strcpy(stringCheck->valor,s);
 			$$ = newasgn($3,newnum(1));
 		} else {
-			if(stingCheck == NULL){
+			if(stringCheck == NULL){
 				printf ("Variável não declarada : %s\n",$3);
 			}
 		}
@@ -589,7 +637,6 @@ stmt: IF '(' exp ')' '{' list '}' %prec IFX { $$ = newflow('I', $3, $6, NULL);}
 		
 		
 	};
-	// | PRINTS '(' exp ')' { $$ = newast('Z',$3,NULL);}
 	| DECLI VARS	{ $$ = newvari($2,1);}
 	| DECLF VARS	{ $$ = newvari($2,2);}
 	| DECLS VARS	{ $$ = newvari($2,3);}
@@ -621,8 +668,7 @@ exp:
 #include "lex.yy.c"
 
 int main(){
-	
-	yyin=fopen("entrada.txt","r");
+	yyin=fopen("entrada.vc","r");
 	yyparse();
 	yylex();
 	fclose(yyin);

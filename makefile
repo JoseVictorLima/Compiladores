@@ -1,6 +1,6 @@
-all : aulaAST.l aulaAST.y
+all : comp.l comp.y
 	clear
-	flex -i aulaAST.l
-	bison aulaAST.y
-	gcc aulaAST.tab.c -o analisador -lfl -lm
+	flex -i comp.l
+	bison comp.y
+	gcc comp.tab.c -o analisador -lfl -lm
 	./analisador
